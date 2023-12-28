@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<MyFirstMVCCore.Models.Domain.Student>
+
+<h1>Studnets</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>City</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.DOB.ToString("dd-MM-yyyy")</td>
+                <td>@item.City</td>
+                <td><a href="Students/ViewAll/@item.Id"><button type="button" class="btn btn-primary btn-sm">View</button></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
