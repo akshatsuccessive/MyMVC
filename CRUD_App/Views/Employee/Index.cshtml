@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Employee";   // On Tab Name
+}
+
+<!-- context result as a list -->
+@model IEnumerable<CRUDApplication.Models.Employee>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1 class="text-center">Employees Details</h1>
+            <a class="btn btn-primary btn-sm mb-2" asp-controller="Employee" asp-action="Create">Add Employee</a>
+            <table class="table table-bordered">
+                <tr class="text-center">
+                    <th>EmployeeId</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Salary</th>
+                    <th>Department</th>
+                    <th>Action</th>
+                </tr>
+                @foreach(var data in Model)
+                {
+                <tr class="text-center">
+                    <td>@data.Id</td>
+                    <td>@data.Name</td>
+                    <td>@data.Email</td>
+                    <td>@data.Salaray</td>
+                    <td>@data.Department</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@data.Id">Edit</a>
+                        <a class="btn btn-sm btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@data.Id">Delete</a>
+                    </td>
+                </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
