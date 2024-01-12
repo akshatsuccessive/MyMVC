@@ -6,10 +6,15 @@ namespace CRUDApplication.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "* Name should be filled")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "* Email should be filled")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "* Salary should be filled")]
         public decimal Salaray { get; set; }
-        public string Department { get; set; }  
+
+        [Required(ErrorMessage = "* Department should be filled")]
+        public string Department { get; set; }
     }
 }
