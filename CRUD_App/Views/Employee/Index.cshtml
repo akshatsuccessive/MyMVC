@@ -23,28 +23,34 @@
                 }
                 <!--<p class="text-center text-success">@*TempData["message"]*@</p>-->
                 <table class="table table-bordered">
-                    <tr class="text-center">
-                        <th>EmployeeId</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Salary</th>
-                        <th>Department</th>
-                        <th>Action</th>
-                    </tr>
-                    @foreach (var data in Model)
-                    {
+                    <thead>
                         <tr class="text-center">
-                            <td>@data.Id</td>
-                            <td>@data.Name</td>
-                            <td>@data.Email</td>
-                            <td>@data.Salaray</td>
-                            <td>@data.Department</td>
-                            <td>
-                                <a class="btn btn-sm btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@data.Id">Edit</a>
-                                <a class="btn btn-sm btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@data.Id">Delete</a>
-                            </td>
+                            <th>EmployeeId</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Salary</th>
+                            <th>Department</th>
+                            <th>Action</th>
                         </tr>
-                    }
+                    </thead>
+                    <tbody>
+                        @{int count = 1;}
+                        @foreach (var data in Model)
+                        {
+                            <tr class="text-center">
+                                <!--<td>@data.Id</td>-->
+                                <td>@(count++)</td>
+                                <td>@data.Name</td>
+                                <td>@data.Email</td>
+                                <td>@data.Salaray</td>
+                                <td>@data.Department</td>
+                                <td>
+                                    <a class="btn btn-sm btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@data.Id">Edit</a>
+                                    <a class="btn btn-sm btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@data.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
                 </table>
             </div>
         </div>
