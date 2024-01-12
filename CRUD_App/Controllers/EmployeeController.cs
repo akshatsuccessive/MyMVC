@@ -30,7 +30,7 @@ namespace CRUDApplication.Controllers
         [HttpPost]
         public IActionResult Create(Employee employee)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 // submission of form
                 var emp = new Employee();
@@ -41,6 +41,7 @@ namespace CRUDApplication.Controllers
 
                 context.Employees.Add(emp);
                 context.SaveChanges();
+                TempData["message"] = "Employee Added Successfully!";
 
                 return RedirectToAction("Index");    // the route which are given here is after Employee/
             }
@@ -51,7 +52,7 @@ namespace CRUDApplication.Controllers
             }
         }
 
-        
+
         // Action for delete
         public IActionResult Delete(int id)
         {
@@ -60,6 +61,7 @@ namespace CRUDApplication.Controllers
             {
                 context.Employees.Remove(emp);
                 context.SaveChanges();
+                TempData["message"] = "Record Deleted Successfully!";
             }
             return RedirectToAction("Index");
         }
@@ -90,6 +92,7 @@ namespace CRUDApplication.Controllers
 
             context.Employees.Update(emp);
             context.SaveChanges();
+            TempData["message"] = "Record Updated Successfully!";
             return RedirectToAction("Index");
         }
     }
