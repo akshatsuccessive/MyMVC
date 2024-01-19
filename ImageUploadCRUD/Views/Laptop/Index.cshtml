@@ -1,0 +1,52 @@
+﻿@model List<LaptopCRUD.Models.ImageImplementation.Laptop>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row">
+         <div class="col-8 offset-2">
+             <h1 class="text-center">Laptop Images</h1>
+             <a class="btn btn-sm btn-primary float-lg-end p-1 m-1" asp-action="AddLaptop" asp-controller="Laptop">Add Laptop</a>
+             <table class="table table-bordered table-hover">
+                 <thead>
+                     <tr class="text-center text-light bg-dark">
+                         <th>Id</th>
+                         <th>Brand</th>
+                         <th>Color</th>
+                         <th>Image</th>
+                         <th>Action</th>
+                     </tr>
+                 </thead>
+                 <tbody class="text-center">
+                     @if(Model != null)
+                    {
+                        @foreach(var laptop in Model)
+                        {
+                            var imgPath = "Content/Laptop/" + laptop.Path;
+                            <tr>
+                                <td>@laptop.Id</td>
+                                <td>@laptop.Brand</td>
+                                <td>@laptop.Color</td>
+                                <td>
+                                    <img src="@imgPath" height="100px" width="100px"/>
+                                </td>
+                                <td>
+                                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-controller="Laptop" asp-route-id="@laptop.Id">
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="Laptop" asp-route-id="@laptop.Id">
+                                        Delete
+                                    </a>
+                                    <a class="btn btn-primary btn-sm" asp-action="View" asp-controller="Laptop" asp-route-id="@laptop.Id">
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+             </table>
+         </div>
+    </div>
+</div>
