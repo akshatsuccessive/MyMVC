@@ -70,5 +70,109 @@ namespace LaptopCRUD.Controllers.ImageImplementation
             }
             return uniqueFileName;
         }
+
+
+
+        public async Task<IActionResult> Delete(int Id)
+        {
+            if(Id == 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var laptop = await _context.Laptops.FindAsync(Id);
+                if(laptop == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    string deleteFromFolder = Path.Combine(_environment.WebRootPath, "Content/Laptop");
+                    string currentImage = Path.Combine(Directory.GetCurrentDirectory(), deleteFromFolder, laptop.Path);
+                    if(currentImage != null)
+                    {
+                        if(System.IO.File.Exists(currentImage))
+                        {
+                            System.IO.File.Delete(currentImage);    
+                        }
+                    }
+                    _context.Laptops.Remove(laptop);
+                    await _context.SaveChangesAsync();
+                    TempData["Success"] = "Record Deleted Successfully";
+                }
+            }
+            return RedirectToAction("Index");   
+        }
+
+        //  view details
+        public async Task<IActionResult> Details(int id)
+        {
+            var laptop = await _context.Laptops.FindAsync(id);
+            return View(laptop);
+        }
+        
+
+        // edit
+        public async Task<IActionResult> Edit(int id)
+        {
+            try
+            {
+                var laptop = await _context.Laptops.FindAsync(id);
+                if(laptop == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(laptop);
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Laptop model)
+        {
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    var laptop = await _context.Laptops.FindAsync(model.Id);
+                    string uniqueFileName = string.Empty;
+                    if(model.ImagePath != null)
+                    {
+                        if(laptop.Path != null)
+                        {
+                            string filePath = Path.Combine(_environment.WebRootPath, "Content/Laptop", laptop.Path);
+                            if(System.IO.File.Exists(filePath))
+                            {
+                                System.IO.File.Delete(filePath);
+                            }
+                        }
+                        uniqueFileName = UploadImage(model);
+                    }
+                    laptop.Brand = model.Brand;
+                    laptop.Color = model.Color;
+                    if(model.ImagePath != null)
+                    {
+                        laptop.Path = uniqueFileName;
+                    }
+                    _context.Laptops.Update(laptop); 
+                    await _context.SaveChangesAsync();
+                    TempData["Success"] = "Record Updated Successfully";
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

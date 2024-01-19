@@ -7,8 +7,10 @@ namespace LaptopCRUD.Models.ImageImplementation
     public class Laptop
     {
         [Key]
-        public int Id { get; set; } 
+        public int Id { get; set; }
+        [Required]
         public string Brand { get; set; }
+        [Required]
         public string Color { get; set; }
         [ValidateNever]
         public string Path { get; set; }

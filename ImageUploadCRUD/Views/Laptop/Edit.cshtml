@@ -1,0 +1,40 @@
+﻿@model LaptopCRUD.Models.ImageImplementation.Laptop;
+@{
+    ViewData["Title"] = "AddLaptop";
+}
+
+<h1>Update Laptop Details</h1>
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-center text-danger"></div>
+    <div class="form-group mb-3">
+        <label asp-for="Brand" class="form-label">Brand</label>
+        <input type="text" asp-for="Brand" class="form-control">
+        <span asp-validation-for="Brand" class="text-danger"></span>
+        <input asp-for="Id" type="hidden" />
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Color" class="form-label">Color</label>
+        <input type="text" asp-for="Color" class="form-control">
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <label asp-for="ImagePath" class="form-label"></label>
+            <input type="file" asp-for="ImagePath" class="form-control" id="ChooseImage" />
+        </div>
+        <div class="col-4">
+            <img src="/Content/Laptop/@Model.Path" width="200px" height="200px"
+                 style="border: 1px solid red; border-radius: 10px; padding:10px"
+                 alt="Laptop" id="PreviewImage" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+    <a class="btn btn-sm btn-warning p-2 m-2" asp-action="Index" asp-controller="Laptop">Back to Home</a>
+</form>
+
+<!-- We use section script such that this script is only used in this page -->
+@section scripts
+{
+    <script src="~/js/laptop.js"></script>
+}
