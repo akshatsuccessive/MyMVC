@@ -1,0 +1,28 @@
+﻿@model CRUD_AJAX.Models.DomainModels.Employee;
+
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <form method="post" asp-action="EditEmployee" asp-controller="Employee" onsubmit="return jQueryAJAXPost(this);" autocomplete="off">
+        <input type="hidden" asp-for="@Model.EmployeeId" />
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Name</label>
+            <input type="text" asp-for="Name" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label">Address</label>
+            <textarea type="text" asp-for="Address" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Department" class="form-label">Department</label>
+            <input type="text" asp-for="Department" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label asp-for="salary" class="form-label">Salary</label>
+            <input type="number" asp-for="salary" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Update</button>
+    </form>
+</div>

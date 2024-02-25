@@ -1,0 +1,12 @@
+﻿@model IEnumerable<CRUD_AJAX.Models.DomainModels.Employee>
+
+@{
+    ViewData["Title"] = "Employee";
+}
+
+<div class="container">
+    <h1 class="text-center text-primary">Employee List</h1>
+    <div id="view-table">
+        @await Html.PartialAsync("_ViewAll", Model)
+    </div>
+</div>
